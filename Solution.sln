@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B4F241C5-C72C-4FB1-99BC-9AC484B9C4EA}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDP.UnitTest", "src\services\IDPService\IDP.UnitTest\IDP.UnitTest.csproj", "{6266BC58-373A-4AB4-BB73-2C9BB8DF74F3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5382BFD2-E555-4E89-A519-E700FDC02FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "src\Common\Auth\Auth.csproj", "{488CF4D4-B207-4498-A85B-022F79DDD8A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{6266BC58-373A-4AB4-BB73-2C9BB8DF74F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6266BC58-373A-4AB4-BB73-2C9BB8DF74F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6266BC58-373A-4AB4-BB73-2C9BB8DF74F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{488CF4D4-B207-4498-A85B-022F79DDD8A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{488CF4D4-B207-4498-A85B-022F79DDD8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{488CF4D4-B207-4498-A85B-022F79DDD8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{488CF4D4-B207-4498-A85B-022F79DDD8A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{1D0F8F96-1004-4CAB-A846-D740D1EBBE3D} = {BAF13B5D-59C2-44DF-B93A-8875F3021E33}
 		{6266BC58-373A-4AB4-BB73-2C9BB8DF74F3} = {BAF13B5D-59C2-44DF-B93A-8875F3021E33}
 		{5382BFD2-E555-4E89-A519-E700FDC02FD9} = {B4F241C5-C72C-4FB1-99BC-9AC484B9C4EA}
+		{488CF4D4-B207-4498-A85B-022F79DDD8A1} = {5382BFD2-E555-4E89-A519-E700FDC02FD9}
 	EndGlobalSection
 EndGlobal

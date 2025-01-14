@@ -12,6 +12,8 @@ namespace IDP.Application.Command.User
     {
         [Required(ErrorMessage = "این داده الزامی است!")]
         [MinLength(4)]
-        public string Name { get; set; }
+        public string FullName { get; set; }
+
+        public string CodeNumber { get; set; }
     }
 }
