@@ -7,8 +7,11 @@ using IDP.Application.Command.Auth;
 using IDP.Application.DTO;
 using MediatR;
 using AutoMapper;
+using DotNetCore.CAP;
+using EventMessages.Events;
 using IDP.Domain.IRepository.Command;
 using IDP.Domain.IRepository.Query;
+using MassTransit;
 
 namespace IDP.Application.Handler.Command.Auth
 {
@@ -18,13 +21,17 @@ namespace IDP.Application.Handler.Command.Auth
         private readonly IMapper _autoMapper;
         private readonly IUserCommandRepository _userCommandRepository;
         private readonly IUserQueryRepository _userQueryRepository;
+        private readonly ICapPublisher _capPublisher;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public AuthCommandHandler(IOtpRedisRepository otpRedisRepository, IMapper autoMapper, IUserCommandRepository userCommandRepository, IUserQueryRepository userQueryRepository)
+        public AuthCommandHandler(IOtpRedisRepository otpRedisRepository, IMapper autoMapper, IUserCommandRepository userCommandRepository, IUserQueryRepository userQueryRepository, ICapPublisher capPublisher, IPublishEndpoint publishEndpoint)
         {
             _otpRedisRepository = otpRedisRepository;
             _autoMapper = autoMapper;
             _userCommandRepository = userCommandRepository;
             _userQueryRepository = userQueryRepository;
+            _capPublisher = capPublisher;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task<bool> Handle(AuthCommand request, CancellationToken cancellationToken)
@@ -38,6 +45,18 @@ namespace IDP.Application.Handler.Command.Auth
                     Random random = new Random();
                     var code = random.Next(1000, 10000);
                     //ارسال پیامک
+                    //CAP
+                    //await _capPublisher.PublishAsync<AuthCommand>("otpevent", new AuthCommand
+                    //{
+                    //    MobileNumber = request.MobileNumber
+                    //});
+                    //Masstransit
+                    await _publishEndpoint.Publish<OtpEvent>(new OtpEvent()
+                    {
+                        //CreateDate = DateTime.Now,
+                        MobileNumber = request.MobileNumber,
+                        OtpCode = code.ToString()
+                    });
                     var res = await _userCommandRepository.Insert(userobj);
                     _otpRedisRepository.Insert(new Otp { UserId = res.ID, OtpCode = "500", IsUse = false });
                     return true;
@@ -47,8 +66,13 @@ namespace IDP.Application.Handler.Command.Auth
                     Random random = new Random();
                     var code = random.Next(1000, 10000);
                     //ارسال پیامک
+                    await _capPublisher.PublishAsync<AuthCommand>("otpevent", new AuthCommand
+                    {
+                        MobileNumber = request.MobileNumber
+                    });
+
                     userobj.UserName = request.MobileNumber;
-                    _otpRedisRepository.Insert(new Otp { UserId = user.ID,OtpCode = "500", IsUse = false });
+                    _otpRedisRepository.Insert(new Otp { UserId = user.ID, OtpCode = "500", IsUse = false });
                 }
 
                 return true;

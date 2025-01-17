@@ -11,6 +11,14 @@
 		<PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
 		<PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+		<PackageReference Include="DotNetCore.CAP" Version="8.3.2" />
+		<PackageReference Include="DotNetCore.CAP.Dashboard" Version="8.3.2" />
+		<PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="8.3.2" />
+		<PackageReference Include="DotNetCore.CAP.SqlServer" Version="8.3.2" />
+		<PackageReference Include="MassTransit" Version="8.3.4" />
+		<PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.3.4" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.3.4" />
+		<PackageReference Include="MassTransit.SqlTransport.SqlServer" Version="8.3.4" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
@@ -19,7 +27,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11"/>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11" />
 	</ItemGroup>
 
 	<ItemGroup>
