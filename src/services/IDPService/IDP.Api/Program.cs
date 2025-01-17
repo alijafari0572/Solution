@@ -2,7 +2,12 @@ using System.Reflection;
 using Asp.Versioning;
 using IDP.Application.Handler.Command;
 using IDP.Application.Handler.Command.User;
+using IDP.Application.Helper;
+using IDP.Domain.IRepository.Command;
+using IDP.Domain.IRepository.Query;
+using IDP.Infra.Data;
 using IDP.Infra.Repository.Command;
+using IDP.Infra.Repository.Query;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +21,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(typeof(UserHandler).GetTypeInfo().Assembly);
 builder.Services.AddScoped<IOtpRedisRepository, OtpRedisRepository>();
+builder.Services.AddScoped<IUserQueryRepository, UserQueryRepository>();
+builder.Services.AddScoped<IUserCommandRepository, UserCommandRepository>();
+builder.Services.AddScoped<QueryDBConnection>();
+builder.Services.AddScoped<CommandDBContext>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+
 builder.Services.AddApiVersioning(options =>
     {
         options.DefaultApiVersion = new ApiVersion(1);

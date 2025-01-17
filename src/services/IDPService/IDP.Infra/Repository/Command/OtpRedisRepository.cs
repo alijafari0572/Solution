@@ -25,11 +25,11 @@ namespace IDP.Infra.Repository.Command
             _configuration = configuration;
         }
 
-        public async Task<bool> Insert(Otp entity)
+        public async Task<Otp> Insert(Otp entity)
         {
             int time = Convert.ToInt32(_configuration.GetSection("Otp:OtpTime").Value);
             _distributedCache.SetString(entity.UserId.ToString(), JsonConvert.SerializeObject(entity), new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(time)).SetAbsoluteExpiration(TimeSpan.FromMinutes(time)));
-            return true;
+            return null;
         }
 
         public Task<bool> Update(Otp entity)
@@ -41,6 +41,14 @@ namespace IDP.Infra.Repository.Command
         {
             _distributedCache.RemoveAsync(entity.UserId.ToString());
             return true;
+        }
+
+        public async Task<Otp> Getdata(string mobile)
+        {
+            var data = _distributedCache.GetString(mobile);
+            if (data == null) return null;
+            var otpobj = JsonConvert.DeserializeObject<Otp>(data);
+            return otpobj;
         }
     }
 }

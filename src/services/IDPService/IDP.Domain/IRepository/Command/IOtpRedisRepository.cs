@@ -11,5 +11,6 @@ namespace IDP.Application.Handler.Command
 {
     public interface IOtpRedisRepository : ICommandRepository<Otp>
     {
+        Task<Otp> Getdata(string mobile);
     }
 }

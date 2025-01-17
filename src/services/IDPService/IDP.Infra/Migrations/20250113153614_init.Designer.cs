@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IDP.Infra.Migrations
 {
-    [DbContext(typeof(ShopDBContext))]
+    [DbContext(typeof(CommandDBContext))]
     [Migration("20250113153614_init")]
     partial class init
     {
